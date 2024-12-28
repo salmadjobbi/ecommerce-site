@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Paiement - MyStore</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <header class="bg-white shadow-lg fixed top-0 w-full z-10">
+    <nav class="flex justify-between items-center p-4 max-w-6xl mx-auto">
+      <div class="logo">
+        <a href="/" class="text-xl font-bold text-blue-600">MyStore</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Checkout Section -->
+  <section class="checkout py-8 max-w-6xl mx-auto">
+    <h2 class="text-3xl font-semibold text-center mb-8">Paiement</h2>
+
+    <div class="form">
+      <div class="mb-4">
+        <label for="name" class="block text-lg font-semibold">Nom complet</label>
+        <input type="text" id="name" class="w-full p-2 border rounded" placeholder="Nom complet">
+      </div>
+      <div class="mb-4">
+        <label for="address" class="block text-lg font-semibold">Adresse de livraison</label>
+        <input type="text" id="address" class="w-full p-2 border rounded" placeholder="Adresse complète">
+      </div>
+      <div class="mb-4">
+        <label for="payment" class="block text-lg font-semibold">Méthode de paiement</label>
+        <select id="payment" class="w-full p-2 border rounded">
+          <option value="credit-card">Carte bancaire</option>
+          <option value="paypal">PayPal</option>
+        </select>
+      </div>
+
+      <button class="bg-blue-500 text-white px-6 py-3 rounded mt-4">Confirmer et Payer</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white py-8">
+    <div class="max-w-6xl mx-auto text-center">
+      <p>&copy; 2024 MyStore. Tous droits réservés.</p>
+      <p>Contact: info@mystore.com</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>

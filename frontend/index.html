@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MyStore - E-commerce</title>
+  <!-- Intégration de Tailwind CSS pour un design moderne -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <a href="cart.html" id="view-cart" class="text-lg font-semibold cursor-pointer">Mon Panier</a>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+       const addToCartButtons = document.querySelectorAll('.add-to-cart');
+      const cartKey = 'cart';
+
+     // Ajouter un produit au panier
+     addToCartButtons.forEach(button => {
+      button.addEventListener('click', () => {
+      const productId = button.getAttribute('data-id');
+      const productName = button.previousElementSibling.previousElementSibling.textContent;
+      const productPrice = button.previousElementSibling.textContent.replace('$', '');
+
+      let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+
+      // Vérifie si le produit est déjà dans le panier
+      const existingItem = cart.find(item => item.id === productId);
+
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cart.push({ id: productId, name: productName, price: parseFloat(productPrice), quantity: 1 });
+      }
+
+      localStorage.setItem(cartKey, JSON.stringify(cart));
+      alert('Produit ajouté au panier');
+     });
+     });
+    });
+
+  </script>
+  
+</head>
+
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <header class="bg-white shadow-lg fixed top-0 w-full z-10">
+    <nav class="flex justify-between items-center p-4 max-w-6xl mx-auto">
+      <div class="logo">
+        <a href="/" class="text-xl font-bold text-blue-600">MyStore</a>
+      </div>
+      <a href="cart.html" id="view-cart" class="text-lg font-semibold text-blue-500 hover:text-blue-600 cursor-pointer">
+        Mon Panier
+      </a>
+      
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero bg-blue-600 text-white text-center py-16">
+    <h1 class="text-4xl font-bold">Bienvenue sur MyStore</h1>
+    <p class="mt-4 text-lg">Découvrez nos produits tendance et ajoutez-les à votre panier en quelques clics !</p>
+  </section>
+
+  <!-- Product List -->
+  <section class="products py-8 max-w-6xl mx-auto">
+    <h2 class="text-3xl font-semibold text-center mb-8">Nos Produits</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <!-- Product Item -->
+      <div class="product-card bg-white p-4 rounded shadow-lg">
+        <img src="/uploads/1.jpg" alt="Produit" class="w-full h-64 object-cover mb-4">
+
+        <h3 class="text-xl font-semibold">meuble en bois</h3>
+        <p class="text-lg text-gray-500">$200.00</p>
+        <button class="add-to-cart" data-id="1">Ajouter au Panier</button>
+      </div>
+      <div class="product-card bg-white p-4 rounded shadow-lg">
+        <img src="/uploads/2.jpg" alt="Produit" class="w-full h-64 object-cover mb-4">
+
+        <h3 class="text-xl font-semibold">meuble gris</h3>
+        <p class="text-lg text-gray-500">$100.00</p>
+        <button class="add-to-cart" data-id="2">Ajouter au Panier</button>
+      </div>
+      <div class="product-card bg-white p-4 rounded shadow-lg">
+        <img src="/uploads/3.jpg" alt="Produit" class="w-full h-64 object-cover mb-4">
+        <h3 class="text-xl font-semibold">Meuble vintage </h3>
+        <p class="text-lg text-gray-500">$100.00</p>
+        <button class="add-to-cart" data-id="3">Ajouter au Panier</button>
+      </div>
+      <div class="product-card bg-white p-4 rounded shadow-lg">
+        <img src="/uploads/16.jpg" alt="Produit" class="w-full h-64 object-cover mb-4">
+        <h3 class="text-xl font-semibold">Décoration classique</h3>
+        <p class="text-lg text-gray-500">$100.00</p>
+        <button class="add-to-cart" data-id="4">Ajouter au Panier</button>
+      </div>
+      <div class="product-card bg-white p-4 rounded shadow-lg">
+        <img src="/uploads/15.jpg" alt="Produit" class="w-full h-64 object-cover mb-4">
+        <h3 class="text-xl font-semibold">Lampe décorative </h3>
+        <p class="text-lg text-gray-500">$100.00</p>
+        <button class="add-to-cart" data-id="5">Ajouter au Panier</button>
+      </div>
+      <div class="product-card bg-white p-4 rounded shadow-lg">
+        <img src="/uploads/14.jpg" alt="Produit" class="w-full h-64 object-cover mb-4">
+        <h3 class="text-xl font-semibold">Tableaux muraux</h3>
+        <p class="text-lg text-gray-500">$100.00</p>
+        <button class="add-to-cart" data-id="6">Ajouter au Panier</button>
+      </div>
+      <div class="product-card bg-white p-4 rounded shadow-lg">
+        <img src="/uploads/12.jpg" alt="Produit" class="w-full h-64 object-cover mb-4">
+        <h3 class="text-xl font-semibold">Décoration dorée </h3>
+        <p class="text-lg text-gray-500">$100.00</p>
+        <button class="add-to-cart" data-id="7">Ajouter au Panier</button>
+      </div>
+      <div class="product-card bg-white p-4 rounded shadow-lg">
+        <img src="/uploads/11.jpg" alt="Produit" class="w-full h-64 object-cover mb-4">
+        <h3 class="text-xl font-semibold">statue romantique</h3>
+        <p class="text-lg text-gray-500">$100.00</p>
+        <button class="add-to-cart" data-id="8">Ajouter au Panier</button>
+      </div>
+      <div class="product-card bg-white p-4 rounded shadow-lg">
+        <img src="/uploads/10.jpg" alt="Produit" class="w-full h-64 object-cover mb-4">
+        <h3 class="text-xl font-semibold">Bougie décorative </h3>
+        <p class="text-lg text-gray-500">$100.00</p>
+        <button class="add-to-cart" data-id="9">Ajouter au Panier</button>
+      </div>
+      <div class="product-card bg-white p-4 rounded shadow-lg">
+        <img src="/uploads/9.jpg" alt="Produit" class="w-full h-64 object-cover mb-4">
+        <h3 class="text-xl font-semibold">Salon minimaliste</h3>
+        <p class="text-lg text-gray-500">$100.00</p>
+        <button class="add-to-cart" data-id="10">Ajouter au Panier</button>
+      </div>
+      <div class="product-card bg-white p-4 rounded shadow-lg">
+        <img src="/uploads/8.jpg" alt="Produit" class="w-full h-64 object-cover mb-4">
+        <h3 class="text-xl font-semibold">Armoire en bois  </h3>
+        <p class="text-lg text-gray-500">$100.00</p>
+        <button class="add-to-cart" data-id="11">Ajouter au Panier</button>
+      </div>
+      <div class="product-card bg-white p-4 rounded shadow-lg">
+        <img src="/uploads/7.jpg" alt="Produit" class="w-full h-64 object-cover mb-4">
+        <h3 class="text-xl font-semibold">Table vintage rétro </h3>
+        <p class="text-lg text-gray-500">$100.00</p>
+        <button class="add-to-cart" data-id="12">Ajouter au Panier</button>
+      </div>
+      
+    </div>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white py-8">
+    <div class="max-w-6xl mx-auto text-center">
+      <p>&copy; 2024 MyStore. Tous droits réservés.</p>
+      <p>Contact: info@mystore.com</p>
+    </div>
+  </footer>
+ 
+
+</body>
+
+</html>

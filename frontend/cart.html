@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mon Panier</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+  <header class="bg-white shadow-lg fixed top-0 w-full z-10">
+    <nav class="flex justify-between items-center p-4 max-w-6xl mx-auto">
+      <a href="index.html" class="text-xl font-bold text-blue-600">Retour à la Boutique</a>
+    </nav>
+  </header>
+
+  <section class="py-16 max-w-6xl mx-auto">
+    <h2 class="text-3xl font-semibold text-center mb-8">Votre Panier</h2>
+    <div id="cart-container" class="space-y-4 bg-white p-4 rounded shadow-lg"></div>
+    <div class="flex justify-between mt-4 text-xl font-bold">
+      <span>Total:</span> <span id="total-price">$0.00</span>
+    </div>
+    
+    <!-- Command Form -->
+    <div class="mt-8">
+      <h3 class="text-2xl font-semibold mb-4">Information de commande</h3>
+      <form id="order-form" class="space-y-4">
+        <input type="text" id="name" placeholder="Nom" class="w-full p-2 border rounded" required />
+        <input type="email" id="email" placeholder="Email" class="w-full p-2 border rounded" required />
+        <input type="tel" id="phone" placeholder="Téléphone" class="w-full p-2 border rounded" required />
+        <textarea id="address" placeholder="Adresse de livraison" class="w-full p-2 border rounded" required></textarea>
+        <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded">Commander</button>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    // Load cart data from localStorage
+    document.addEventListener('DOMContentLoaded', () => {
+      const cartContainer = document.querySelector('#cart-container');
+      const totalPriceElement = document.querySelector('#total-price');
+
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let totalPrice = 0;
+
+      if (cart.length === 0) {
+        cartContainer.innerHTML = '<p class="text-center text-gray-500">Votre panier est vide.</p>';
+      } else {
+        cart.forEach(item => {
+          const cartItem = document.createElement('div');
+          cartItem.classList.add('flex', 'justify-between', 'items-center', 'p-2', 'border-b');
+          cartItem.innerHTML = `
+            <div>
+              <h3 class="text-lg font-semibold">${item.name}</h3>
+              <p class="text-gray-500">Quantité: ${item.quantity}</p>
+            </div>
+            <div>$${(item.price * item.quantity).toFixed(2)}</div>
+          `;
+          cartContainer.appendChild(cartItem);
+          totalPrice += item.price * item.quantity;
+        });
+      }
+
+      totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
+    });
+
+    // Handle order submission
+   // Handle order submission
+    document.querySelector('#order-form').addEventListener('submit', (e) => {
+     e.preventDefault();
+
+      const name = document.querySelector('#name').value;
+     const email = document.querySelector('#email').value;
+     const phone = document.querySelector('#phone').value;
+     const address = document.querySelector('#address').value;
+
+     const orderData = { name, email, phone, address };
+
+     fetch('/api/checkout', { // Backend API endpoint
+     method: 'POST',
+     headers: { 'Content-Type': 'application/json' },
+     body: JSON.stringify(orderData)
+     })
+    .then(response => {
+      if (!response.ok) {
+        return response.json().then(data => {
+          throw new Error(data.error || 'Erreur lors de la commande.');
+        });
+      }
+      return response.json();
+    })
+    .then(data => {
+      alert('Commande réussie ! Merci pour votre achat.');
+      localStorage.removeItem('cart'); // Clear the cart
+      window.location.href = 'index.html'; // Redirect after success
+    })
+    .catch(error => {
+      alert(error.message || 'Erreur de réseau. Veuillez réessayer.');
+    });
+   });
+
+  </script>
+ <script src="/js/cart.js"></script>
+
+</body>
+
+</html>
