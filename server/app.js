@@ -78,6 +78,6 @@ app.post('/api/checkout', async (req, res) => {
 
 app.use(cors());
 // Start the server
-app.listen(3001, '0.0.0.0', () => {
-  console.log('Server running at http://0.0.0.0:3001');
+app.listen(3002, '0.0.0.0', () => {
+  console.log('Server running at http://0.0.0.0:3002');
 });
