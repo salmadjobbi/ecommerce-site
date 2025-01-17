@@ -5,7 +5,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { createUser } from './db.js';
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 2222;
 
 const app = express(); // Create an express app instance
 
@@ -78,6 +78,6 @@ app.post('/api/checkout', async (req, res) => {
 
 app.use(cors());
 // Start the server
-app.listen(3002, '0.0.0.0', () => {
-  console.log('Server running at http://0.0.0.0:3002');
+app.listen(2222, '0.0.0.0', () => {
+  console.log('Server running at http://0.0.0.0:2222');
 });
